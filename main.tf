@@ -34,10 +34,22 @@ resource "google_compute_firewall" "allow_ssh" {
   }
 }
 
+resource "google_compute_firewall" "allow_http" {
+  name = "firewall-rule-allow-http"
+  network = google_compute_network.vpc_network.name
+
+  target_tags = ["allow-http"]
+
+  allow {
+    protocol = "tcp"
+    ports = ["80"]
+  }
+}
+
 resource "google_compute_instance" "vm_instance_1" {
   name         = "terraform-instance-1"
   machine_type = "f1-micro"
-  tags	       = ["web", "dev"]
+  tags	       = ["allow-http", "dev"]
 
   zone    = var.zone_1_region_1
 
@@ -57,7 +69,7 @@ resource "google_compute_instance" "vm_instance_1" {
 resource "google_compute_instance" "vm_instance_2" {
   name         = "terraform-instance-2"
   machine_type = "f1-micro"
-  tags	       = ["web", "dev"]
+  tags	       = ["allow-http", "dev"]
 
   zone    = var.zone_1_region_2
 
