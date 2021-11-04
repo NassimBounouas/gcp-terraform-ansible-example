@@ -84,4 +84,10 @@ resource "google_compute_instance" "vm_instance_2" {
     access_config {
     }
   }
+
+}
+
+resource "google_compute_project_metadata_item" "ssh-keys" {
+  key   = "ssh-keys"
+  value = "${var.user}:${file(var.public_key_file)}"
 }
