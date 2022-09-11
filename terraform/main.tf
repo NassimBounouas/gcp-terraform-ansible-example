@@ -19,7 +19,7 @@ resource "google_compute_network" "vpc_network" {
 }
 
 data "http" "icanhazip" {
-  url = "http://icanhazip.com"
+  url = "https://ipv4.icanhazip.com"
 }
 
 resource "google_compute_firewall" "allow_ssh" {
@@ -55,7 +55,7 @@ resource "google_compute_instance" "vm_instance_1" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-11"
     }
   }
 
@@ -75,7 +75,7 @@ resource "google_compute_instance" "vm_instance_2" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-11"
     }
   }
 
